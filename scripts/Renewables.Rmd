@@ -1,0 +1,312 @@
+---
+title: "Renewables"
+author: "Dennis Duffy"
+date: "2022-09-28"
+output: html_document
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+Renewable Energy Consumption vs Total Energy Consumption in MN
+
+```{r, echo = F}
+library(tidyverse)
+library(jsonlite)
+library(httr)
+library(janitor)
+library(downloadthis)
+library(data.table)
+library(ggrepel)
+library(writexl)
+library(keyring)
+library(here)
+
+eia_key <- key_get("eia_api")
+
+today <- format(Sys.Date(), format = "%m-%d-%Y")
+
+options(scipen = 999)
+
+renewable_data <-
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?api_key=",
+      eia_key,
+      "&frequency=annual&data[0]=value&facets[seriesId][]=RETCB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000"
+    )
+  )
+
+total_data <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?api_key=",
+      eia_key,
+      "&frequency=annual&data[0]=value&facets[seriesId][]=TETCB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000"
+    )
+  )
+
+api_cleanup <- function(data_use, fuel){
+  
+  data_use <- fromJSON(rawToChar(data_use$content))
+  
+  data_use <- tibble(data_use$response$data)
+  
+  data_use <- data_use |> 
+    mutate(year = as.numeric(period)) |> 
+    mutate(consumption = as.numeric(value) / 1000, #converting to Trillion btus to make it easier to read  
+           fuel_type = fuel) |> 
+    select(year, consumption, fuel_type) 
+  
+  return(data_use)
+  
+}
+
+total <- api_cleanup(total_data, "Total")
+
+renewables <- api_cleanup(renewable_data, "Renewables")
+
+consumption_data <- total |> 
+  bind_rows(renewables) |> 
+  mutate(consumption_label = case_when(
+    year == max(year) ~ as.character(consumption), 
+    TRUE ~ ""
+  ))
+
+renewable_25_goal <- consumption_data |> 
+  filter(fuel_type == "Total") |> 
+  filter(year == max(year)) |>
+  mutate(goal = .25 * consumption) |> 
+  pull(goal)
+
+top_year <- max(consumption_data$year)
+
+bottom_year <- top_year - 20
+
+consumption_top <- ifelse(max(consumption_data$consumption) < 2000, 2000, 2500)
+
+consumption_colors <- c("Renewables" = "#78BE21", "Total" = "#003865")
+
+p <- consumption_data |> 
+  ggplot() + aes(x = year, y = consumption, label = consumption_label) + geom_line(aes(colour = factor(fuel_type)), size = 1) + geom_hline(yintercept = renewable_25_goal) + 
+  geom_text_repel(aes(label = consumption_label), nudge_x = 1.1) +
+  scale_x_continuous(limits = c(bottom_year, top_year + 1.5), breaks = seq(bottom_year, top_year, by = 5)) +
+  scale_y_continuous(breaks = c(0, renewable_25_goal, consumption_top), labels = c("0", "25% Goal", as.character(consumption_top))) + 
+  scale_color_manual(values = consumption_colors, name = "") + ylab("Trillion BTU") + xlab("Year") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+                                                                                                  panel.background = element_blank(), axis.line = element_line(colour = "black")) + 
+  ggtitle("Total Energy Consumption from Renewables") + 
+  labs(caption = paste0("Source: Energy Information Administration\nAccessed ", today)) 
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "Renewable Energy Consumption Goal", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+ggsave("C:/Users/dduffy/OneDrive - State of Minnesota - MN365/Frequently Used Graphs/Renewables/Renewable Energy Consumption Goal.png", p)
+
+```
+
+&nbsp;
+&nbsp;
+
+Renewable Electricity Trend
+
+```{r, echo = F}
+raw_generation <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/electricity/electric-power-operational-data/data?api_key=",
+      eia_key,
+      "&data[]=generation&frequency=annual&facets[location][]=MN&facets[sectorid][]=99"
+    )
+  )
+ 
+raw_generation <- fromJSON(rawToChar(raw_generation$content))
+
+renewable_generation <- raw_generation$response$data |>
+  tibble() |> 
+  clean_names() |> 
+  mutate(period = as.numeric(period),
+         generation = as.numeric(generation)) |> 
+  filter(fueltypeid %in% c("BIO", "HYC", "SUN", "WND", "ALL")) |> 
+  mutate(fuel_type_description = str_replace_all(fuel_type_description, c("wind" = "Wind", 
+                                                                          "solar" = "Solar",
+                                                                          "conventional hydroelectric" = "Hydroelectric", 
+                                                                          "biomass" = "Biomass"))) |> 
+  select(period, fuel_type_description, generation) |> 
+  pivot_wider(names_from = fuel_type_description, values_from = generation) |> 
+  mutate(across(c(Biomass, Hydroelectric, Wind, Solar), .fns = ~ . / `all fuels`)) |> 
+  select(-c(`all fuels`)) |> 
+  pivot_longer(!period, names_to = "fuel_type", values_to = "percent") 
+
+top_year <- max(renewable_generation$period)
+
+bottom_year <- top_year - 20
+
+renewable_colors <- c("Wind" = "#9BCBEB", 
+                      "Solar" = "#FFC845", 
+                      "Hydroelectric" = "#008EAA", 
+                      "Biomass" = "#8D3F2B")
+
+p <- renewable_generation |>
+  mutate(percent_label = ifelse(period == max(period), paste0(as.character(round(percent*100)), "%"), "")) |> 
+  ggplot() + aes(x = period, y = percent) + geom_line(aes(colour = factor(fuel_type)), size = 1) + scale_color_manual(values = renewable_colors, name = "") + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_blank()) + 
+  scale_y_continuous(labels = scales::percent, limits = c(0, .3)) + geom_text_repel(aes(label = percent_label), nudge_x = 1) + scale_x_continuous(limits = c(bottom_year, top_year + 3), breaks = seq(bottom_year, top_year, by = 5), name = "Year") + 
+  ggtitle(paste0("Renewable Electricity in Minnesota: ", as.character(bottom_year), "-", as.character(top_year))) +
+  labs(caption = paste0("Source: Energy Information Administration\nAccessed ", today)) 
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "Renewable Electricity Trend in Minnesota", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+ggsave("C:/Users/dduffy/OneDrive - State of Minnesota - MN365/Frequently Used Graphs/Renewables/Renewable Electricity Trend in Minnesota.png", p)
+
+
+```
+
+&nbsp;
+&nbsp;
+
+Minnesota and US Renewable Electricity Trend
+
+```{r, echo = F}
+raw_generation_mn <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/electricity/electric-power-operational-data/data?api_key=",
+      eia_key,
+      "&data[]=generation&frequency=annual&facets[location][]=MN&facets[sectorid][]=99"
+    )
+  )
+ 
+raw_generation_us <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/electricity/electric-power-operational-data/data?api_key=",
+      eia_key,
+      "&data[]=generation&frequency=annual&facets[location][]=US&facets[sectorid][]=99"
+    )
+  )
+
+raw_generation_mn <- fromJSON(rawToChar(raw_generation_mn$content))
+
+raw_generation_us <- fromJSON(rawToChar(raw_generation_us$content))
+
+cleanup <- function(x, area){
+  
+  x <- x$response$data |> 
+    tibble() |> 
+    clean_names() |> 
+    mutate(period = as.numeric(period), 
+           generation = as.numeric(generation)) |> 
+    select(period, fuel_type_description, generation) |> 
+    filter(fuel_type_description %in% c("all fuels", "all renewables", "conventional hydroelectric")) |> 
+    pivot_wider(names_from = fuel_type_description, values_from = generation) |> 
+    mutate(renewables = `all renewables` + `conventional hydroelectric`) |> 
+    mutate(across(renewables, ~ . / `all fuels`)) |> 
+    select(period, renewables) |> 
+    mutate(area = area)
+  
+  return(x)
+  
+}
+
+mn_renewables <- cleanup(raw_generation_mn, "Minnesota")
+
+us_renewables <- cleanup(raw_generation_us, "US")
+
+total_renewables <- mn_renewables |> 
+  bind_rows(us_renewables)
+
+area_colors <- c("Minnesota" = "#78BE21", "US" = "#000000")
+
+top_year = max(mn_renewables$period)
+
+bottom_year <- min(mn_renewables$period)
+
+p <- mn_renewables |> 
+  bind_rows(us_renewables) |> 
+  mutate(percent_label = ifelse(period == max(period), paste0(as.character(round(renewables * 100)), "%"), "")) |> 
+  ggplot() + aes(x = period, y = renewables) + geom_line(aes(color = factor(area)), size = 1) + scale_color_manual(values = area_colors, name = "") + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_blank()) + 
+  scale_y_continuous(labels = scales::percent) + scale_x_continuous(name = "Year", limits = c(bottom_year, top_year + 3), breaks = seq(bottom_year, top_year, by = 5)) + 
+  geom_text_repel(aes(label = percent_label), nudge_x = 1) + ggtitle("Minnesota and US Renewable Electricity Trend") + 
+  labs(caption = paste0("Source: Energy Information Administration\nAccessed ", today)) 
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "Minnesota and US Renewable Electricity Trend", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+ggsave("C:/Users/dduffy/OneDrive - State of Minnesota - MN365/Frequently Used Graphs/Renewables/Minnesota and US Renewable Electricity Trend.png", p)
+
+suppressMessages(
+ total_renewables |> 
+  download_this(
+    output_name = "Minnesota and US Renewable Electricity Trend", 
+    output_extension = ".xlsx", 
+    button_label = "Download Data",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

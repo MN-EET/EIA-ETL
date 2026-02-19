@@ -1,0 +1,370 @@
+---
+title: "Residential and Commercial Energy Use"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r, echo = FALSE}
+library(tidyverse)
+library(jsonlite)
+library(httr)
+library(janitor)
+library(downloadthis)
+library(data.table)
+library(keyring)
+
+eia_key <- key_get("eia_api")
+
+options(scipen = 999)
+
+total_res <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=TERCB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+elec_res <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=ESRCB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+gas_res <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=NGRCB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+total_com <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=TNCSB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+elec_com <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=ESCCB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+gas_com <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=NGCCB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=desc&offset=0&length=5000"
+    )
+  )
+
+total_ind <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=TNISB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+elec_ind <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=ESICB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+gas_ind <- 
+  GET(
+    paste0(
+      "https://api.eia.gov/v2/seds/data/?frequency=annual&data[0]=value&api_key=",
+      eia_key,
+      "&facets[seriesId][]=NGICB&facets[stateId][]=MN&sort[0][column]=period&sort[0][direction]=asc&offset=0&length=5000"
+    )
+  )
+
+api_cleanup <- function(raw_data, sector, fuel_type){
+  
+  x <- fromJSON(rawToChar(raw_data$content))
+  
+  x <- tibble(x$response$data) |> 
+    mutate(period = as.numeric(period), 
+           value = as.numeric(value)) |> 
+    select(period, value) |> 
+    mutate(Sector = sector, 
+           fuel_type = fuel_type) |> 
+    rename(year = period)
+  
+  return(x)
+  
+}
+  
+total_res <- api_cleanup(total_res, sector = "Residential", fuel_type = "Total")
+
+elec_res <- api_cleanup(elec_res, sector = "Residential", fuel_type = "Electricity")
+
+gas_res <- api_cleanup(gas_res, sector = "Residential", fuel_type = "Natural Gas")
+
+total_com <- api_cleanup(total_com, sector = "Commercial", fuel_type = "Total")
+
+elec_com <- api_cleanup(elec_com, sector = "Commercial", fuel_type = "Electricity")
+
+gas_com <- api_cleanup(gas_com, sector = "Commercial", fuel_type = "Natural Gas")
+
+total_ind <- api_cleanup(total_ind, sector = "Industrial", fuel_type = "Total")
+
+elec_ind <- api_cleanup(elec_ind, sector = "Industrial", fuel_type = "Electricity")
+
+gas_ind <- api_cleanup(gas_ind, sector = "Industrial", fuel_type = "Natural Gas")
+
+
+```
+
+&nbsp;
+&nbsp;
+
+Total Energy Consumption in the Residential and Commercial Sector
+
+```{r, echo = FALSE}
+
+total_energy <- total_res |> 
+  bind_rows(total_com) |>
+  bind_rows(total_ind) |> 
+  filter(year >= 2003)
+
+graph_max <- total_energy |> 
+  filter(value == max(value)) |> 
+  mutate(graph_max = value * 1.1) |> 
+  pull(graph_max)
+
+
+p <- total_energy |> 
+  ggplot() + aes(x = year, y = value, color = Sector) + geom_line(linewidth = 1) +
+  theme(panel.grid = element_blank(), panel.background = element_blank(), 
+        axis.line = element_line(color = "black")) + scale_color_manual(values = c("#003865", "#78BE21", "#E57200")) +
+  ylim(0, graph_max) + 
+  ggtitle("Total Energy Consumption - Residential and Commercial Customers") + 
+  ylab("Billion Btu") + xlab("Year")
+  
+p
+
+suppressMessages(
+ p |> 
+  download_this(
+    output_name = "Minnesota Total Energy Consumption - Residential and Commercial Sectors", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+suppressMessages(
+ total_energy |> 
+  download_this(
+    output_name = "Minnesota Total Energy Consumption - Residential and Commercial Sectors", 
+    output_extension = ".xlsx", 
+    button_label = "Download Data",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+
+```
+
+&nbsp;
+&nbsp;
+
+Total Electricity Consumption in the Residential and Commercial Sector
+
+```{r, echo = FALSE}
+
+total_electricity <- elec_res |> 
+  bind_rows(elec_com) |> 
+  filter(year >= 2005)
+
+p <- total_electricity |> 
+  ggplot() + aes(x = year, y = value, color = Sector) + geom_line(linewidth = 1) + 
+  theme(panel.grid = element_blank(), panel.background = element_blank(), 
+        axis.line = element_line(color = "black")) + scale_color_manual(values = c("#003865", "#78BE21")) +
+  ylim(0, graph_max) + 
+  ggtitle("Total Electricity Consumption - Residential and Commercial Customers") + 
+  ylab("Billion Btu") + xlab("Year")
+
+p
+
+suppressMessages(
+ p |> 
+  download_this(
+    output_name = "Minnesota Total Electricity Consumption - Residential and Commercial Sectors", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+suppressMessages(
+ total_electricity |> 
+  download_this(
+    output_name = "Minnesota Total Electricity Consumption - Residential and Commercial Sectors", 
+    output_extension = ".xlsx", 
+    button_label = "Download Data",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+
+```
+
+&nbsp;
+&nbsp;
+
+```{r, echo = FALSE}
+
+total_gas <- gas_res |> 
+  bind_rows(gas_com) |> 
+  filter(year >= 2005) 
+
+p <- total_gas |> 
+  ggplot() + aes(x = year, y = value, color = Sector) + geom_line(linewidth = 1) + 
+  theme(panel.grid = element_blank(), panel.background = element_blank(), 
+        axis.line = element_line(color = "black")) + scale_color_manual(values = c("#003865", "#78BE21")) + 
+  ylim(0, graph_max) + 
+  ggtitle("Total Gas Consumption - Residential and Commercial Customers") + 
+  ylab("Billion Btu") + xlab("Year")
+
+p
+
+suppressMessages(
+ p |> 
+  download_this(
+    output_name = "Minnesota Total Natural Gas Consumption - Residential and Commercial Sectors", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+suppressMessages(
+ total_gas |> 
+  download_this(
+    output_name = "Minnesota Total Natural Gas Consumption - Residential and Commercial Sectors", 
+    output_extension = ".xlsx", 
+    button_label = "Download Data",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+
+```
+
+&nbsp;
+&nbsp;
+
+Combined Electricity and Gas Consumption
+
+```{r, echo = FALSE}
+
+total_elec_gas <- total_electricity |> 
+  bind_rows(total_gas) |> 
+  group_by(year, Sector) |> 
+  summarise(value = sum(value))
+
+graph_max <- total_elec_gas |> 
+  ungroup() |> 
+  filter(value == max(value)) |> 
+  mutate(graph_max = value * 1.1) |> 
+  pull(graph_max)
+
+p <- total_elec_gas |> 
+  ggplot() + aes(x = year, y = value, color = Sector) + geom_line(linewidth = 1) + 
+  theme(panel.grid = element_blank(), panel.background = element_blank(), 
+        axis.line = element_line(color = "black")) + scale_color_manual(values = c("#003865", "#78BE21")) + 
+  ylim(0, graph_max) + 
+  ggtitle("Total Electricity and Gas Consumption - Residential and Commercial Customers") + 
+  ylab("Billion Btu") + xlab("Year")
+
+p
+
+suppressMessages(
+ p |> 
+  download_this(
+    output_name = "Minnesota Total Electricity and Natural Gas Consumption - Residential and Commercial Sectors", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+suppressMessages(
+ total_elec_gas |> 
+  download_this(
+    output_name = "Minnesota Total Electricity and Natural Gas Consumption - Residential and Commercial Sectors", 
+    output_extension = ".xlsx", 
+    button_label = "Download Data",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

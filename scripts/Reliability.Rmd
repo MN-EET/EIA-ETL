@@ -1,0 +1,211 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+See report from MISO:https://cdn.misoenergy.org/MISO%20Response%20to%20the%20Reliability%20Imperative504018.pdf
+
+Statewide SAIDI figures retrieved from here: https://www.eia.gov/electricity/annual/html/epa_11_04.html
+
+Statewide SAIFI figures retrieved from here: https://www.eia.gov/electricity/annual/html/epa_11_05.html
+
+```{r, echo = FALSE}
+
+library(tidyverse)
+library(rvest)
+library(janitor)
+library(downloadthis)
+library(ggrepel)
+
+url <- "https://www.eia.gov/electricity/annual/html/epa_11_04.html"
+
+reliability_fetch <- function(x){
+  
+  table_use <- read_html(url) |> 
+    html_table() |> 
+    pluck(2) |> 
+    clean_names() |> 
+    select(1:31) |> 
+    row_to_names(row_number = 1) |> 
+    clean_names()
+  
+  
+  return(table_use)
+  
+}
+
+med_fetch <- function(x, measure_name){
+  
+  table_use <- reliability_fetch(x) |> 
+    select(1:11) |> 
+    row_to_names(row_number = 1) |> 
+    rename(region = 1) |> 
+    mutate(across(!c(region), as.numeric)) |> 
+    pivot_longer(!region, names_to = "year", values_to = measure_name) |> 
+    filter(region %in% c("Minnesota", "West North Central", "U.S. Total")) 
+  
+  return(table_use)
+  
+}
+
+womed_fetch <- function(x, measure_name){
+  
+  table_use <- reliability_fetch(url) |> 
+    select(1, 12:21) |> 
+    row_to_names(row_number = 1) |> 
+    rename(region = 1) |> 
+    mutate(across(!c(region), as.numeric)) |> 
+    pivot_longer(!region, names_to = "year", values_to = measure_name) |> 
+    filter(region %in% c("Minnesota", "West North Central", "U.S. Total")) 
+  
+  return(table_use)
+  
+}
+
+med <- med_fetch(url, "saidi")
+
+womed <- womed_fetch(url, "saidi")
+
+loss <- reliability_fetch(url) |> 
+  select(1, 22:31) |> 
+  row_to_names(row_number = 1) |> 
+  pivot_longer(!`Census Divisionand State`, names_to = "year", values_to = "saidi_loss_removed") |> 
+  rename(region = 1) |> 
+  filter(region %in% c("Minnesota", "West North Central", "U.S. Total")) |> 
+  mutate(saidi_loss_removed = as.numeric(saidi_loss_removed)) |> 
+  left_join(med, by = c("region" = "region", "year" = "year")) |> 
+  mutate(supply_disruption = saidi - saidi_loss_removed)
+
+```
+&nbsp;
+&nbsp;
+
+SAIDI (with Major Event Days) (interpreted as the minutes of non-momentary electric interruptions, per year, the average customer experienced.)
+
+```{r, echo = FALSE}
+
+region_colors <- c("Minnesota" = "#008EAA", "U.S. Total" = "#0D5257", "West North Central Region" = "#8D3F2B")
+
+p <- med |> 
+  mutate(region = case_when(
+    region == "West North Central" ~ "West North Central Region", 
+    TRUE ~ region
+  ),
+  saidi_label = case_when(
+    year == max(year) ~ saidi, 
+    TRUE ~ NA
+  )) |> 
+  ggplot() + aes(x = year, y = saidi, group = region) + geom_line(aes(colour = factor(region)), size = 1) + scale_color_manual(values = region_colors, name = "Region") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + ylab("SAIDI with Major Events") + ggtitle("System Average Interuption Duration Index - With Major Event Days") +
+  labs(caption = "Source: Energy Information Administration") + ylim(0, 550) 
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "SAIDI With Major Event days", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+
+```
+
+&nbsp;
+&nbsp;
+
+SAIDI (without Major Event Days) - Interpreted as the number of non-momentary electric interruptions, per year, the average customer experienced.
+
+```{r, echo = FALSE}
+
+p <- womed |> 
+  mutate(region = case_when(
+    region == "West North Central" ~ "West North Central Region", 
+    TRUE ~ region
+  )) |> 
+  ggplot() + aes(x = year, y = saidi, group = region) + geom_line(aes(colour = factor(region)), size = 1) + scale_color_manual(values = region_colors, name = "Region") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + ylab("SAIDI without Major Events") + ggtitle("System Average Interuption Duration Index - Without Major Event Days") +
+  labs(caption = "Source: Energy Information Administration") + ylim(0, 550)
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "SAIDI Without Major Event Days", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+```
+
+```{r, echo = FALSE}
+
+url <- "https://www.eia.gov/electricity/annual/html/epa_11_05.html"
+
+p <- med_fetch(url, "SAIFI") |> 
+  mutate(region = case_when(
+    region == "West North Central" ~ "West North Central Region", 
+    TRUE ~ region
+  )) |> 
+  rename(Year = year) |> 
+  ggplot() + aes(x = Year, y = SAIFI, group = region) + geom_line(aes(colour = factor(region)), size = 1) + scale_color_manual(values = region_colors, name = "Region") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + ylab("SAIFI with Major Events") + ggtitle("System Average Interuption Frequency Index - With Major Event Days") +
+  labs(caption = "Source: Energy Information Administration") + ylim(0, 2)
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "SAIFI With Major Event Days", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+```
+
+&nbsp;
+&nbsp;
+
+SAIFI Without Major Event Days
+
+```{r, echo = FALSE}
+
+p <- womed_fetch(url, "SAIFI") |> 
+  mutate(region = case_when(
+    region == "West North Central" ~ "West North Central Region", 
+    TRUE ~ region
+  )) |> 
+  rename(Year = year) |> 
+  ggplot() + aes(x = Year, y = SAIFI, group = region) + geom_line(aes(colour = factor(region)), size = 1) + scale_color_manual(values = region_colors, name = "Region") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + ylab("SAIFI without Major Events") + ggtitle("System Average Interuption Frequency Index - Without Major Event Days") +
+  labs(caption = "Source: Energy Information Administration") + ylim(0, 2)
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "SAIFI Without Major Event Days", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+
+```
+
+

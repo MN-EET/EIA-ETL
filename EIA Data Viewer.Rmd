@@ -1,0 +1,147 @@
+---
+title: "Data Viewer"
+output: html_document
+---
+
+```{r, include = F, echo = F}
+library(here)
+```
+
+
+## {.tabset}
+
+### Overview
+
+```{r, echo = FALSE, include = FALSE}
+
+last_run = Sys.Date()
+
+```
+
+
+Last Updated: `r last_run`
+
+Table of Contents
+
+Net Generation
+  
+  -Net Generation (current) 
+  
+  -Fig. 1-G (pg. 8): Generation mix between 2005 and Current
+  
+  -Figure 4-B (pg. 57): US Electricity Generation Mix 2005 and Current
+  
+  -Figure 4-C (pg. 57): Midwest Electricity Generation (2018)
+  
+  -Figure 4-N (pg. 63): Minnesota Electricity Generation by Source (2000-Current)
+
+Renewables
+  
+  -Fig. 1-C (pg. 4): Renewable energy vs total energy consumption 2000-Current (Note: this still uses API v.1 and will need to be updated once SEDS is live in the API)
+  
+  -Figure 4-F (pg. 58): Minnesota Renewable Electricity Generation (2000-Current)
+  
+  -Figure 4-G (pg. 59): Minnesota and US Renewable Electricity (2000-Current)
+
+Renewables and Coal
+  
+  -Figure 4-H (pg. 59): Minnesota and US Coal Electricity (2000-Current)
+  
+  -Figure 4-I (pg. 60): Minnesota and US Carbon Intensity of Electricity (2000-Current)
+  
+  -Figure 4-J (pg. 61): Economic and Seasonal Dispatch of Coal
+  
+  -Figure 4-K (pg. 61): Power Generation Transition in Minnesota
+  
+Natural Gas
+  
+  -Figure 4-0 (pg. 64): Henry Hub Spot Prices (2016- Current)
+  
+Consumption 
+  
+  -Figure 6-C (pg. 117): Minnesota Total Energy Consumption by Source
+  
+  -Figure 6-D (pg. 118): Minnesota Total Energy Consumption by Source (% Btu) (2005–Current) 
+  
+  -Figure 6-E (pg. 118): Minnesota Total Energy Consumption by Renewable Source (2000 – Current)
+  
+Solar
+  
+  -Figure 6-W (pg. 133): Minnesota Solar Additions 
+  
+  -Figure 6-X (pg. 134): Minnesota Cumulative Solar Capacity
+
+Wind
+  
+  -Figure 6-E (pg. 133): Minnesota Total Energy Consumption by Renewable Source (2000 – Current)
+  
+  -Minnesota Cumulative Wind Capacity (New)
+  
+Additions and Retirements
+  
+  -Figure 4-M (pg. 63): Minnesota Capacity Additions and Retirements (2000 – Current)
+  
+Possibilities for future development
+
+  -Resource plans from utilities
+  -How do different demographic groups heat their homes? And is there any relationship with energy burden at the county level? Particular interest propane use and heating oil. Anywhere that doesn't have access to utility natural gas. 
+
+### Net Generation
+
+```{r child = here::here("scripts/Net Generation.Rmd")}
+
+```
+
+### Renewables
+```{r child = here::here("scripts/Renewables.Rmd")}
+
+```
+
+### Renewables and Coal
+```{r child = here::here("scripts/Renewables and Coal.Rmd")}
+
+```
+
+### Solar
+```{r child = here::here("scripts/Solar.Rmd")}
+
+```
+
+### Wind
+```{r child = here::here("scripts/Wind.Rmd")}
+
+```
+
+### Storage
+```{r child = here::here("scripts/Storage.Rmd")}
+
+```
+
+### Natural Gas
+```{r child = here::here("scripts/Natural Gas.Rmd")}
+
+```
+
+### Energy Consumption
+```{r child = here::here("scripts/Energy Consumption.Rmd")}
+
+```
+
+### Energy Losses
+```{r child = here::here("scripts/Electrical System Losses.Rmd")}
+
+```
+
+### Residential and Commercial Consumption
+```{r child = here::here("scripts/Residential and Commercial Consumption.Rmd")}
+
+```
+
+### Reliability
+```{r child = here::here("scripts/Reliability.Rmd")}
+
+```
+
+
+
+

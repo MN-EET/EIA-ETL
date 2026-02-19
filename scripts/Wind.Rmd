@@ -1,0 +1,119 @@
+---
+title: "Wind"
+output: html_document
+---
+
+
+
+```{r, echo = FALSE, include = FALSE}
+
+library(tidyverse)
+library(ggrepel)
+library(downloadthis)
+library(readxl)
+library(duckdb)
+library(httr)
+library(jsonlite)
+library(janitor)
+
+# Analysts change this path as necessary
+
+db_path <- "I:/Enrgy_div/SEO/CleanEnegyTechUnit/CET Projects/Data Repository/generator_database_shared/generator_database_dbt/dev.duckdb"
+
+db <- dbConnect(duckdb::duckdb(), db_path, read_only = TRUE)
+
+wind_query <- dbSendQuery(
+  db, 
+  "
+    SELECT 
+      utility, 
+      operating_year AS year_interconnected, 
+      nameplate_mw, 
+      nameplate_mw * 1000 AS kwac
+    FROM main.mart_total__wind_capacity mtwc 
+  "
+  )
+
+raw_wind <- dbFetch(wind_query) |> 
+  tibble() 
+
+dbClearResult(wind_query)
+dbDisconnect(db, shutdown = TRUE)
+
+```
+
+Download Wind Data
+
+```{r, echo = FALSE}
+raw_wind |> 
+  download_this(
+    output_name = "Wind Capacity in Minnesota", 
+      output_extension = ".xlsx", 
+      button_label = "Download Data",
+      button_type = "success", 
+      has_icon = TRUE,
+      icon = "fa fa-save"
+  )
+```
+
+Wind aggregate capacity by year
+
+```{r, echo = FALSE}
+
+total_wind <- paste(round(sum(raw_wind$kwac, na.rm = T)/1000, digits = 2), "MW", sep = " ")
+
+year_limit <- max(raw_wind$year_interconnected, na.rm = TRUE) + 3
+
+top_year <- max(raw_wind$year_interconnected, na.rm = TRUE)
+
+bottom_year <- max(raw_wind$year_interconnected, na.rm = TRUE) - 15
+
+p <- raw_wind |>
+  filter(complete.cases(year_interconnected)) |> 
+  group_by(year_interconnected) |> 
+  summarize(total_kwac = sum(kwac, na.rm = T)) |> 
+  mutate(cumulative_kwac = cumsum(total_kwac), 
+         total_label = ifelse(year_interconnected == max(year_interconnected), total_wind, "")) |> 
+  filter(year_interconnected >= max(year_interconnected) - 15) |> 
+  ggplot() + aes(x = year_interconnected, y = cumulative_kwac / 1000) + geom_line(color = "#9BCBEB", size = 1) + 
+  scale_x_continuous(limits = c(bottom_year, year_limit), breaks = seq(bottom_year, top_year, by = 5), name = "Year") + 
+  geom_text_repel(aes(label = total_label), nudge_x = 1) + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black")) + ylab("Cumulative Wind Capacity (MW/AC)") + ggtitle("Cumulative Wind Capacity") + 
+  labs(caption = "Source: Energy Information Administration Form EIA-860")
+
+p
+
+suppressMessages(
+  p |> 
+  download_this(
+    output_name = "Cumulative Wind Capacity", 
+    output_extension = ".png", 
+    button_label = "Download Plot",
+    button_type = "success", 
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+)
+
+ggsave("C:/Users/dduffy/OneDrive - State of Minnesota - MN365/Frequently Used Graphs/Wind/Cumulative Wind Capacity.png", p)
+
+```
+
+&nbsp;
+&nbsp;
+
+Annual Wind Installations
+
+```{r, echo = FALSE}
+
+raw_wind |>
+  filter(complete.cases(year_interconnected)) |> 
+  group_by(year_interconnected) |> 
+  summarize(total_mw = sum(kwac, na.rm = T) / 1000) |> 
+  filter(year_interconnected >= max(year_interconnected) - 15) |> 
+  ggplot() + aes(x = year_interconnected, y = total_mw) + geom_col() + 
+  geom_text(aes(label = total_mw), vjust = -1) + ylim(0, 600)
+
+```
+
+
