@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minnesota Energy Data - EIA Plots</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #f8f9fa;
+      color: #333;
+    }
+    h1 { color: #003865; }
+    h2 {
+      color: #003865;
+      border-bottom: 2px solid #003865;
+      padding-bottom: 0.3rem;
+      margin-top: 2.5rem;
+    }
+    .plot-container {
+      background: white;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .plot-container img {
+      width: 100%;
+      height: auto;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+    .download-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #003865;
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      font-size: 0.85rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Minnesota Electricity Generation</h1>
+  <p>Auto-updated weekly from the U.S. Energy Information Administration API.</p>
+  <p class="note">Right-click any image and select "Copy image address" to get a permanent link for presentations or SharePoint pages.</p>
+
+  <h2>Minnesota - Most Recent Year</h2>
+  <div class="plot-container">
+    <img src="plots/electricity_generation_mn.png" alt="Electricity Generation in Minnesota">
+    <a class="download-link" href="plots/electricity_generation_mn.png" download>Download PNG</a>
+  </div>
+
+  <h2>Change in Minnesota Generation</h2>
+  <div class="plot-container">
+    <img src="plots/change_in_generation_mn.png" alt="Change in Electricity Generation - Minnesota">
+    <a class="download-link" href="plots/change_in_generation_mn.png" download>Download PNG</a>
+  </div>
+
+  <h2>Minnesota Generation Trend</h2>
+  <div class="plot-container">
+    <img src="plots/generation_trend_mn.png" alt="Electricity Generation Trend - Minnesota">
+    <a class="download-link" href="plots/generation_trend_mn.png" download>Download PNG</a>
+  </div>
+
+  <h2>Total and Renewable Generation</h2>
+  <div class="plot-container">
+    <img src="plots/total_and_renewable_generation.png" alt="Total and Renewable Generation">
+    <a class="download-link" href="plots/total_and_renewable_generation.png" download>Download PNG</a>
+  </div>
+
+  <h2>U.S. - Most Recent Year</h2>
+  <div class="plot-container">
+    <img src="plots/electricity_generation_us.png" alt="Electricity Generation in U.S.">
+    <a class="download-link" href="plots/electricity_generation_us.png" download>Download PNG</a>
+  </div>
+
+  <h2>Change in U.S. Generation</h2>
+  <div class="plot-container">
+    <img src="plots/change_in_generation_us.png" alt="Change in Electricity Generation - U.S.">
+    <a class="download-link" href="plots/change_in_generation_us.png" download>Download PNG</a>
+  </div>
+
+  <h2>Midwest</h2>
+  <div class="plot-container">
+    <img src="plots/electricity_generation_midwest.png" alt="Electricity Generation in Midwest">
+    <a class="download-link" href="plots/electricity_generation_midwest.png" download>Download PNG</a>
+  </div>
+
+  <h2>MROW Region (EPA)</h2>
+  <div class="plot-container">
+    <img src="plots/electricity_generation_mrow.png" alt="Electricity Generation - MROW">
+    <a class="download-link" href="plots/electricity_generation_mrow.png" download>Download PNG</a>
+  </div>
+
+  <h2>Data Downloads</h2>
+  <p>
+    <a href="data/electricity_generation_mn.csv">Minnesota Generation Data (CSV)</a><br>
+    <a href="data/electricity_generation_us.csv">U.S. Generation Data (CSV)</a>
+  </p>
+
+  <footer>
+    <p>Data: U.S. Energy Information Administration | Updated weekly via GitHub Actions</p>
+  </footer>
+
+</body>
+</html>

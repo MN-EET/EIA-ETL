@@ -3,117 +3,420 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minnesota Energy Data - EIA Plots</title>
+  <title>Minnesota Energy Data — EIA Dashboard</title>
   <style>
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem;
-      background: #f8f9fa;
-      color: #333;
+    :root {
+      --mn-blue: #003865;
+      --mn-green: #78BE21;
+      --mn-teal: #008EAA;
+      --mn-dark: #0D5257;
+      --mn-brown: #8D3F2B;
+      --mn-gold: #FFC845;
+      --mn-gray: #f5f6f7;
+      --mn-border: #dde0e4;
     }
-    h1 { color: #003865; }
-    h2 {
-      color: #003865;
-      border-bottom: 2px solid #003865;
-      padding-bottom: 0.3rem;
-      margin-top: 2.5rem;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; color: #333; background: #fff; }
+    header { background: var(--mn-blue); color: #fff; padding: 1.5rem 2rem; }
+    header h1 { font-size: 1.5rem; font-weight: 600; }
+    header p { font-size: 0.85rem; opacity: 0.8; margin-top: 0.25rem; }
+
+    /* Tab navigation */
+    .tab-nav { display: flex; flex-wrap: wrap; gap: 0; background: var(--mn-gray); border-bottom: 2px solid var(--mn-blue); padding: 0 1rem; }
+    .tab-btn {
+      padding: 0.6rem 1rem; border: none; background: transparent; cursor: pointer;
+      font-size: 0.82rem; font-weight: 500; color: #555; border-bottom: 3px solid transparent;
+      transition: all 0.15s;
     }
-    .plot-container {
-      background: white;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .plot-container img {
-      width: 100%;
-      height: auto;
-    }
-    .note {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 0.5rem;
-    }
-    .download-link {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: #003865;
-    }
-    footer {
-      margin-top: 3rem;
-      padding-top: 1rem;
-      border-top: 1px solid #ddd;
-      font-size: 0.85rem;
-      color: #666;
+    .tab-btn:hover { color: var(--mn-blue); background: #e8ecf0; }
+    .tab-btn.active { color: var(--mn-blue); border-bottom-color: var(--mn-blue); background: #fff; font-weight: 600; }
+
+    /* Tab content */
+    .tab-panel { display: none; padding: 1.5rem 2rem 3rem; max-width: 1100px; }
+    .tab-panel.active { display: block; }
+    .tab-panel h2 { font-size: 1.2rem; color: var(--mn-blue); margin-bottom: 1rem; border-bottom: 1px solid var(--mn-border); padding-bottom: 0.5rem; }
+    .tab-panel h3 { font-size: 1rem; color: var(--mn-dark); margin: 1.5rem 0 0.5rem; }
+    .tab-panel p { font-size: 0.85rem; color: #555; margin-bottom: 0.75rem; line-height: 1.5; }
+
+    .plot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
+    .plot-card { border: 1px solid var(--mn-border); border-radius: 6px; overflow: hidden; background: #fff; }
+    .plot-card img { width: 100%; height: auto; display: block; }
+    .plot-card .caption { padding: 0.5rem 0.75rem; font-size: 0.78rem; color: #666; background: var(--mn-gray); display: flex; justify-content: space-between; align-items: center; }
+    .plot-card .caption a { color: var(--mn-teal); text-decoration: none; font-weight: 500; }
+    .plot-card .caption a:hover { text-decoration: underline; }
+
+    .data-section { margin-top: 1.5rem; padding: 1rem; background: var(--mn-gray); border-radius: 6px; }
+    .data-section h4 { font-size: 0.9rem; color: var(--mn-dark); margin-bottom: 0.5rem; }
+    .data-section ul { list-style: none; padding: 0; }
+    .data-section li { padding: 0.3rem 0; }
+    .data-section a { color: var(--mn-teal); text-decoration: none; font-size: 0.85rem; }
+    .data-section a:hover { text-decoration: underline; }
+    .data-section a::before { content: "📄 "; }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.75rem; color: #999; border-top: 1px solid var(--mn-border); margin-top: 2rem; }
+    .note { background: #fef9e7; border-left: 3px solid var(--mn-gold); padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.83rem; border-radius: 0 4px 4px 0; }
+
+    @media (max-width: 600px) {
+      .tab-btn { font-size: 0.72rem; padding: 0.5rem 0.6rem; }
+      .plot-grid { grid-template-columns: 1fr; }
+      .tab-panel { padding: 1rem; }
     }
   </style>
 </head>
 <body>
 
-  <h1>Minnesota Electricity Generation</h1>
-  <p>Auto-updated weekly from the U.S. Energy Information Administration API.</p>
-  <p class="note">Right-click any image and select "Copy image address" to get a permanent link for presentations or SharePoint pages.</p>
+<header>
+  <h1>Minnesota Energy Data Dashboard</h1>
+  <p>Automated visualizations from EIA API and state energy databases</p>
+</header>
 
-  <h2>Minnesota - Most Recent Year</h2>
-  <div class="plot-container">
-    <img src="plots/electricity_generation_mn.png" alt="Electricity Generation in Minnesota">
-    <a class="download-link" href="plots/electricity_generation_mn.png" download>Download PNG</a>
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="net-generation">Net Generation</button>
+  <button class="tab-btn" data-tab="energy-consumption">Energy Consumption</button>
+  <button class="tab-btn" data-tab="natural-gas">Natural Gas</button>
+  <button class="tab-btn" data-tab="renewables">Renewables</button>
+  <button class="tab-btn" data-tab="renewables-coal">Renewables &amp; Coal</button>
+  <button class="tab-btn" data-tab="reliability">Reliability</button>
+  <button class="tab-btn" data-tab="residential-commercial">Res. &amp; Commercial</button>
+  <button class="tab-btn" data-tab="losses">System Losses</button>
+  <button class="tab-btn" data-tab="solar">Solar</button>
+  <button class="tab-btn" data-tab="wind">Wind</button>
+  <button class="tab-btn" data-tab="storage">Storage</button>
+</nav>
+
+<!-- ============ NET GENERATION ============ -->
+<div class="tab-panel active" id="net-generation">
+  <h2>Net Generation</h2>
+  <p>Annual electricity generation by fuel source for Minnesota, U.S., and Midwest regions.</p>
+
+  <h3>Minnesota</h3>
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/electricity_generation_mn.png" alt="MN Generation by Source">
+      <div class="caption"><span>Generation by source (most recent year)</span><a href="plots/electricity_generation_mn.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/change_in_generation_mn.png" alt="Change in MN Generation">
+      <div class="caption"><span>15-year change in generation mix</span><a href="plots/change_in_generation_mn.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/generation_trend_mn.png" alt="MN Generation Trend">
+      <div class="caption"><span>Generation trend over time</span><a href="plots/generation_trend_mn.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/total_and_renewable_generation.png" alt="Total and Renewable Generation">
+      <div class="caption"><span>Total vs. renewable generation</span><a href="plots/total_and_renewable_generation.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>Change in Minnesota Generation</h2>
-  <div class="plot-container">
-    <img src="plots/change_in_generation_mn.png" alt="Change in Electricity Generation - Minnesota">
-    <a class="download-link" href="plots/change_in_generation_mn.png" download>Download PNG</a>
+  <h3>United States &amp; Midwest</h3>
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/electricity_generation_us.png" alt="US Generation by Source">
+      <div class="caption"><span>U.S. generation by source</span><a href="plots/electricity_generation_us.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/change_in_generation_us.png" alt="Change in US Generation">
+      <div class="caption"><span>15-year change — U.S.</span><a href="plots/change_in_generation_us.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/electricity_generation_midwest.png" alt="Midwest Generation">
+      <div class="caption"><span>Midwest generation by source</span><a href="plots/electricity_generation_midwest.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/electricity_generation_mrow.png" alt="MROW Generation">
+      <div class="caption"><span>MROW region (EPA data)</span><a href="plots/electricity_generation_mrow.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>Minnesota Generation Trend</h2>
-  <div class="plot-container">
-    <img src="plots/generation_trend_mn.png" alt="Electricity Generation Trend - Minnesota">
-    <a class="download-link" href="plots/generation_trend_mn.png" download>Download PNG</a>
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/electricity_generation_mn.csv">Minnesota generation data (CSV)</a></li>
+      <li><a href="data/electricity_generation_us.csv">U.S. generation data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ ENERGY CONSUMPTION ============ -->
+<div class="tab-panel" id="energy-consumption">
+  <h2>Energy Consumption</h2>
+  <p>Total energy consumption by fuel type in Minnesota, and renewable consumption comparisons.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/energy_consumption_trend.png" alt="Energy Consumption Trend">
+      <div class="caption"><span>Minnesota energy consumption trend</span><a href="plots/energy_consumption_trend.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/change_in_energy_consumption.png" alt="Change in Consumption">
+      <div class="caption"><span>Change in energy consumption</span><a href="plots/change_in_energy_consumption.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/renewable_consumption_mn_vs_us.png" alt="Renewable Consumption MN vs US">
+      <div class="caption"><span>Renewable consumption — MN vs. U.S.</span><a href="plots/renewable_consumption_mn_vs_us.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>Total and Renewable Generation</h2>
-  <div class="plot-container">
-    <img src="plots/total_and_renewable_generation.png" alt="Total and Renewable Generation">
-    <a class="download-link" href="plots/total_and_renewable_generation.png" download>Download PNG</a>
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/energy_consumption_mn.csv">Minnesota energy consumption data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ NATURAL GAS ============ -->
+<div class="tab-panel" id="natural-gas">
+  <h2>Natural Gas</h2>
+  <p>Henry Hub spot prices and natural gas share of Minnesota electricity generation.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/henry_hub_spot_price.png" alt="Henry Hub Spot Price">
+      <div class="caption"><span>Monthly Henry Hub spot price</span><a href="plots/henry_hub_spot_price.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/natural_gas_volatility.png" alt="Natural Gas Volatility">
+      <div class="caption"><span>Natural gas volatility in generation</span><a href="plots/natural_gas_volatility.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>U.S. - Most Recent Year</h2>
-  <div class="plot-container">
-    <img src="plots/electricity_generation_us.png" alt="Electricity Generation in U.S.">
-    <a class="download-link" href="plots/electricity_generation_us.png" download>Download PNG</a>
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/henry_hub_prices.csv">Henry Hub price data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ RENEWABLES ============ -->
+<div class="tab-panel" id="renewables">
+  <h2>Renewables</h2>
+  <p>Renewable energy consumption goals, electricity generation by renewable type, and MN vs. U.S. comparisons.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/renewable_energy_consumption_goal.png" alt="Renewable Consumption Goal">
+      <div class="caption"><span>Renewable vs. total consumption (25% goal)</span><a href="plots/renewable_energy_consumption_goal.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/renewable_electricity_trend_mn.png" alt="Renewable Electricity by Type">
+      <div class="caption"><span>Renewable electricity by type — MN</span><a href="plots/renewable_electricity_trend_mn.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/renewable_electricity_mn_vs_us.png" alt="Renewable Electricity MN vs US">
+      <div class="caption"><span>Renewable electricity — MN vs. U.S.</span><a href="plots/renewable_electricity_mn_vs_us.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>Change in U.S. Generation</h2>
-  <div class="plot-container">
-    <img src="plots/change_in_generation_us.png" alt="Change in Electricity Generation - U.S.">
-    <a class="download-link" href="plots/change_in_generation_us.png" download>Download PNG</a>
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/renewable_electricity_mn_vs_us.csv">MN vs. U.S. renewable electricity (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ RENEWABLES & COAL ============ -->
+<div class="tab-panel" id="renewables-coal">
+  <h2>Renewables &amp; Coal</h2>
+  <p>Coal generation trends, carbon intensity, seasonal coal dispatch, and the generation transition.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/coal_electricity_trend.png" alt="Coal Electricity Trend">
+      <div class="caption"><span>Coal electricity trend — MN vs. U.S.</span><a href="plots/coal_electricity_trend.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/carbon_intensity.png" alt="Carbon Intensity">
+      <div class="caption"><span>Carbon intensity of electricity</span><a href="plots/carbon_intensity.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/seasonal_coal_dispatch.png" alt="Seasonal Coal Dispatch">
+      <div class="caption"><span>Seasonal dispatch of coal</span><a href="plots/seasonal_coal_dispatch.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/generation_transition_mn.png" alt="Generation Transition">
+      <div class="caption"><span>MN electricity generation transition</span><a href="plots/generation_transition_mn.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>Midwest</h2>
-  <div class="plot-container">
-    <img src="plots/electricity_generation_midwest.png" alt="Electricity Generation in Midwest">
-    <a class="download-link" href="plots/electricity_generation_midwest.png" download>Download PNG</a>
+  <div class="note">The carbon intensity chart downloads emissions data directly from the EIA Excel file. An active internet connection is required.</div>
+</div>
+
+<!-- ============ RELIABILITY ============ -->
+<div class="tab-panel" id="reliability">
+  <h2>Reliability</h2>
+  <p>System Average Interruption Duration Index (SAIDI) and Frequency Index (SAIFI) for Minnesota, the West North Central region, and the U.S.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/saidi_with_major_events.png" alt="SAIDI With Major Events">
+      <div class="caption"><span>SAIDI — with major event days</span><a href="plots/saidi_with_major_events.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/saidi_without_major_events.png" alt="SAIDI Without Major Events">
+      <div class="caption"><span>SAIDI — without major event days</span><a href="plots/saidi_without_major_events.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/saifi_with_major_events.png" alt="SAIFI With Major Events">
+      <div class="caption"><span>SAIFI — with major event days</span><a href="plots/saifi_with_major_events.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/saifi_without_major_events.png" alt="SAIFI Without Major Events">
+      <div class="caption"><span>SAIFI — without major event days</span><a href="plots/saifi_without_major_events.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>MROW Region (EPA)</h2>
-  <div class="plot-container">
-    <img src="plots/electricity_generation_mrow.png" alt="Electricity Generation - MROW">
-    <a class="download-link" href="plots/electricity_generation_mrow.png" download>Download PNG</a>
+  <div class="note">Reliability data is scraped from EIA HTML tables. See also: <a href="https://cdn.misoenergy.org/MISO%20Response%20to%20the%20Reliability%20Imperative504018.pdf" target="_blank">MISO Reliability Imperative Report</a></div>
+</div>
+
+<!-- ============ RESIDENTIAL & COMMERCIAL ============ -->
+<div class="tab-panel" id="residential-commercial">
+  <h2>Residential &amp; Commercial Consumption</h2>
+  <p>Energy, electricity, and natural gas consumption across residential, commercial, and industrial sectors.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/sector_total_energy.png" alt="Total Energy by Sector">
+      <div class="caption"><span>Total energy — all sectors</span><a href="plots/sector_total_energy.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/sector_electricity.png" alt="Electricity by Sector">
+      <div class="caption"><span>Electricity — residential &amp; commercial</span><a href="plots/sector_electricity.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/sector_gas.png" alt="Gas by Sector">
+      <div class="caption"><span>Natural gas — residential &amp; commercial</span><a href="plots/sector_gas.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/sector_elec_and_gas.png" alt="Electricity + Gas Combined">
+      <div class="caption"><span>Combined electricity &amp; gas</span><a href="plots/sector_elec_and_gas.png" download>Download</a></div>
+    </div>
   </div>
 
-  <h2>Data Downloads</h2>
-  <p>
-    <a href="data/electricity_generation_mn.csv">Minnesota Generation Data (CSV)</a><br>
-    <a href="data/electricity_generation_us.csv">U.S. Generation Data (CSV)</a>
-  </p>
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/sector_energy_consumption.csv">Sector energy consumption data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
 
-  <footer>
-    <p>Data: U.S. Energy Information Administration | Updated weekly via GitHub Actions</p>
-  </footer>
+<!-- ============ SYSTEM LOSSES ============ -->
+<div class="tab-panel" id="losses">
+  <h2>Electrical System Losses</h2>
+  <p>Tracking progress toward the 2030 goal of reducing waste heat and waste electricity by 15% compared to 2005 levels.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/electrical_system_losses.png" alt="Electrical System Losses">
+      <div class="caption"><span>System losses with 2030 goal line</span><a href="plots/electrical_system_losses.png" download>Download</a></div>
+    </div>
+  </div>
+
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/electrical_system_losses.csv">Electrical system losses data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ SOLAR ============ -->
+<div class="tab-panel" id="solar">
+  <h2>Solar</h2>
+  <p>Solar capacity installations in Minnesota — cumulative, annual, and by installation type. Data sourced from the generator database (PUC DG reports + EIA-860).</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/cumulative_solar_capacity.png" alt="Cumulative Solar Capacity">
+      <div class="caption"><span>Cumulative solar capacity</span><a href="plots/cumulative_solar_capacity.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/solar_capacity_by_type_cumulative.png" alt="Solar by Type Cumulative">
+      <div class="caption"><span>Cumulative by installation type</span><a href="plots/solar_capacity_by_type_cumulative.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/annual_solar_installations.png" alt="Annual Solar Installations">
+      <div class="caption"><span>Annual solar installations</span><a href="plots/annual_solar_installations.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/solar_capacity_by_type_bar.png" alt="Solar Capacity by Type">
+      <div class="caption"><span>Capacity share by type</span><a href="plots/solar_capacity_by_type_bar.png" download>Download</a></div>
+    </div>
+  </div>
+
+  <div class="note">Solar, wind, and storage scripts require access to the DuckDB generator database on the I: drive.</div>
+
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/solar_capacity_mn.csv">Minnesota solar capacity data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ WIND ============ -->
+<div class="tab-panel" id="wind">
+  <h2>Wind</h2>
+  <p>Wind capacity in Minnesota — cumulative growth and annual installations.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/cumulative_wind_capacity.png" alt="Cumulative Wind Capacity">
+      <div class="caption"><span>Cumulative wind capacity</span><a href="plots/cumulative_wind_capacity.png" download>Download</a></div>
+    </div>
+    <div class="plot-card">
+      <img src="plots/annual_wind_installations.png" alt="Annual Wind Installations">
+      <div class="caption"><span>Annual wind installations</span><a href="plots/annual_wind_installations.png" download>Download</a></div>
+    </div>
+  </div>
+
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/wind_capacity_mn.csv">Minnesota wind capacity data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STORAGE ============ -->
+<div class="tab-panel" id="storage">
+  <h2>Storage</h2>
+  <p>Battery and energy storage capacity growth in Minnesota.</p>
+
+  <div class="plot-grid">
+    <div class="plot-card">
+      <img src="plots/cumulative_storage_capacity.png" alt="Cumulative Storage Capacity">
+      <div class="caption"><span>Cumulative storage capacity</span><a href="plots/cumulative_storage_capacity.png" download>Download</a></div>
+    </div>
+  </div>
+
+  <div class="data-section">
+    <h4>Download Data</h4>
+    <ul>
+      <li><a href="data/storage_capacity_mn.csv">Minnesota storage capacity data (CSV)</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  Data sourced from the U.S. Energy Information Administration, Minnesota Public Utilities Commission, and EPA.<br>
+  Generated with R &middot; Hosted on GitHub Pages
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
 
 </body>
 </html>
