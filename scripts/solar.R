@@ -6,19 +6,18 @@ cat("=== Solar ===\n")
 
 # Analysts: update this path as necessary
 db_path <- Sys.getenv("GENERATOR_DB_PATH",
-  unset = "I:/Enrgy_div/SEO/CleanEnegyTechUnit/CET Projects/Data Repository/generator_database_shared/generator_database_dbt/dev.duckdb")
+  unset = "I:/Enrgy_div/SEO/CleanEnegyTechUnit/CET Projects/Data Repository/generator_database_shared/generator_database_dbt/prod.duckdb")
 
 db <- dbConnect(duckdb::duckdb(), db_path, read_only = TRUE)
 raw_solar <- dbGetQuery(db, "
   SELECT *, ROUND(nameplate_mw * 1000) AS kwac
   FROM main.mart_combined__solar_capacity
-  WHERE year_interconnected <= 2024
 ") |> tibble() |> mutate(customer_type = str_to_title(customer_type))
 dbDisconnect(db, shutdown = TRUE)
 
 save_data(raw_solar, "solar_capacity_mn.csv")
 
-total_solar <- paste(round(sum(raw_solar$kwac, na.rm = TRUE) / 1000, digits = 2), "MW")
+total_solar <- paste(round(sum(raw_solar$nameplate_kw, na.rm = TRUE) / 1000, digits = 2), "MW")
 top_year <- max(raw_solar$year_interconnected, na.rm = TRUE)
 bottom_year <- top_year - 15
 year_limit <- top_year + 3

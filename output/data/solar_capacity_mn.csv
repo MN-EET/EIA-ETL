@@ -12,9 +12,6 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 27,0.027,Xcel Energy,Solar,2015,Commercial,PUC DER,27
 40,0.04,Xcel Energy,Solar,2012,Commercial,PUC DER,40
 40,0.04,Xcel Energy,Solar,2012,Commercial,PUC DER,40
-72,0.072,Xcel Energy,Solar,2018,Commercial,PUC DER,72
-4.2,0.004200000000000001,Xcel Energy,Solar,2018,Residential,PUC DER,4
-4.32,0.00432,Xcel Energy,Solar,2018,Residential,PUC DER,4
 78.3,0.0783,Xcel Energy,Solar,2015,Commercial,PUC DER,78
 4.3,0.0043,Xcel Energy,Solar,2015,Residential,PUC DER,4
 2500,2.5,Xcel Energy,Solar,2016,Commercial,PUC DER,2500
@@ -51,27 +48,6 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 10,0.01,Xcel Energy,Solar,2014,Residential,PUC DER,10
 3,0.003,Xcel Energy,Solar,2015,Residential,PUC DER,3
 6,0.006,Xcel Energy,Solar,2014,Residential,PUC DER,6
-8.35,0.00835,Xcel Energy,Solar,2024,Residential,PUC DER,8
-5.85,0.005849999999999999,Xcel Energy,Solar,2024,Residential,PUC DER,6
-5.693,0.005692999999999999,Xcel Energy,Solar,2024,Residential,PUC DER,6
-5.693,0.005692999999999999,Xcel Energy,Solar,2024,Residential,PUC DER,6
-3.796,0.003796,Xcel Energy,Solar,2024,Residential,PUC DER,4
-9.8,0.009800000000000001,Xcel Energy,Solar,2024,Residential,PUC DER,10
-8.448,0.008448,Xcel Energy,Solar,2024,Residential,PUC DER,8
-8.832,0.008832000000000001,Xcel Energy,Solar,2024,Residential,PUC DER,9
-3.04,0.00304,Xcel Energy,Solar,2024,Residential,PUC DER,3
-4.94,0.004940000000000001,Xcel Energy,Solar,2024,Residential,PUC DER,5
-3.936,0.003936,Xcel Energy,Solar,2024,Residential,PUC DER,4
-4.592,0.004592,Xcel Energy,Solar,2024,Residential,PUC DER,5
-12.146,0.012146,Xcel Energy,Solar,2024,Residential,PUC DER,12
-5.248,0.005248,Xcel Energy,Solar,2024,Residential,PUC DER,5
-7,0.007,Xcel Energy,Solar,2024,Residential,PUC DER,7
-2.657,0.002657,Xcel Energy,Solar,2024,Residential,PUC DER,3
-8.376,0.008376,Xcel Energy,Solar,2024,Residential,PUC DER,8
-7.678,0.007678,Xcel Energy,Solar,2024,Residential,PUC DER,8
-6.046,0.006046,Xcel Energy,Solar,2024,Residential,PUC DER,6
-9.12,0.00912,Xcel Energy,Solar,2024,Residential,PUC DER,9
-6.56,0.00656,Xcel Energy,Solar,2024,Residential,PUC DER,7
 3.747,0.003747,Xcel Energy,Solar,2020,Commercial,PUC DER,4
 2.9,0.0029,Xcel Energy,Solar,2020,Residential,PUC DER,3
 7.616,0.0076159999999999995,Xcel Energy,Solar,2020,Residential,PUC DER,8
@@ -189,6 +165,30 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 9.994,0.009994,Xcel Energy,Solar,2019,Residential,PUC DER,10
 7.616,0.0076159999999999995,Xcel Energy,Solar,2019,Residential,PUC DER,8
 9.994,0.009994,Xcel Energy,Solar,2019,Residential,PUC DER,10
+72,0.072,Xcel Energy,Solar,2018,Commercial,PUC DER,72
+4.2,0.004200000000000001,Xcel Energy,Solar,2018,Residential,PUC DER,4
+4.32,0.00432,Xcel Energy,Solar,2018,Residential,PUC DER,4
+8.35,0.00835,Xcel Energy,Solar,2024,Residential,PUC DER,8
+5.85,0.005849999999999999,Xcel Energy,Solar,2024,Residential,PUC DER,6
+5.693,0.005692999999999999,Xcel Energy,Solar,2024,Residential,PUC DER,6
+5.693,0.005692999999999999,Xcel Energy,Solar,2024,Residential,PUC DER,6
+3.796,0.003796,Xcel Energy,Solar,2024,Residential,PUC DER,4
+9.8,0.009800000000000001,Xcel Energy,Solar,2024,Residential,PUC DER,10
+8.448,0.008448,Xcel Energy,Solar,2024,Residential,PUC DER,8
+8.832,0.008832000000000001,Xcel Energy,Solar,2024,Residential,PUC DER,9
+3.04,0.00304,Xcel Energy,Solar,2024,Residential,PUC DER,3
+4.94,0.004940000000000001,Xcel Energy,Solar,2024,Residential,PUC DER,5
+3.936,0.003936,Xcel Energy,Solar,2024,Residential,PUC DER,4
+4.592,0.004592,Xcel Energy,Solar,2024,Residential,PUC DER,5
+12.146,0.012146,Xcel Energy,Solar,2024,Residential,PUC DER,12
+5.248,0.005248,Xcel Energy,Solar,2024,Residential,PUC DER,5
+7,0.007,Xcel Energy,Solar,2024,Residential,PUC DER,7
+2.657,0.002657,Xcel Energy,Solar,2024,Residential,PUC DER,3
+8.376,0.008376,Xcel Energy,Solar,2024,Residential,PUC DER,8
+7.678,0.007678,Xcel Energy,Solar,2024,Residential,PUC DER,8
+6.046,0.006046,Xcel Energy,Solar,2024,Residential,PUC DER,6
+9.12,0.00912,Xcel Energy,Solar,2024,Residential,PUC DER,9
+6.56,0.00656,Xcel Energy,Solar,2024,Residential,PUC DER,7
 5.693,0.005692999999999999,Xcel Energy,Solar,2024,Residential,PUC DER,6
 6.08,0.00608,Xcel Energy,Solar,2024,Residential,PUC DER,6
 8.35,0.00835,Xcel Energy,Solar,2024,Residential,PUC DER,8
@@ -17652,6 +17652,7 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 13.05,0.01305,Meeker Cooperative Light & Power,Solar,2021,Residential,PUC DER,13
 15.4,0.0154,Meeker Cooperative Light & Power,Solar,2021,Residential,PUC DER,15
 15,0.015,Meeker Cooperative Light & Power,Solar,2021,Residential,PUC DER,15
+15.6,0.0156,Meeker Cooperative Light & Power,Solar,NA,Residential,PUC DER,16
 6,0.006,Meeker Cooperative Light & Power,Solar,2021,Residential,PUC DER,6
 12.54,0.012539999999999999,Meeker Cooperative Light & Power,Solar,2021,Residential,PUC DER,13
 5.8,0.0058,Meeker Cooperative Light & Power,Solar,2021,Residential,PUC DER,6
@@ -17809,6 +17810,7 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 7.6,0.0076,Madelia Municipal Light & Power,Solar,2020,Residential,PUC DER,8
 6,0.006,Madelia Municipal Light & Power,Solar,2020,Residential,PUC DER,6
 9,0.009,Madelia Municipal Light & Power,Solar,2019,Commercial,PUC DER,9
+15.36,0.015359999999999999,Lyon-Lincoln Electric Cooperative,Solar,NA,Commercial,PUC DER,15
 13.056,0.013056,Lyon-Lincoln Electric Cooperative,Solar,2024,Residential,PUC DER,13
 38,0.038,Lyon-Lincoln Electric Cooperative,Solar,2024,Residential,PUC DER,38
 7.04,0.00704,Lyon-Lincoln Electric Cooperative,Solar,2024,Residential,PUC DER,7
@@ -17827,6 +17829,7 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 10,0.01,Lyon-Lincoln Electric Cooperative,Solar,2018,Residential,PUC DER,10
 39.6,0.0396,Lyon-Lincoln Electric Cooperative,Solar,2017,Residential,PUC DER,40
 15.36,0.015359999999999999,Lyon-Lincoln Electric Cooperative,Solar,2016,Residential,PUC DER,15
+26.46,0.02646,Lyon-Lincoln Electric Cooperative,Solar,NA,Residential,PUC DER,26
 12.67,0.01267,Le Sueur Municipal Utilities,Solar,2024,Residential,PUC DER,13
 6.96,0.00696,Le Sueur Municipal Utilities,Solar,2023,Residential,PUC DER,7
 12.47,0.01247,Le Sueur Municipal Utilities,Solar,2022,Residential,PUC DER,12
@@ -17847,6 +17850,29 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 99.96,0.09996,Lanesboro Public Utilities,Solar,2023,Commercial,PUC DER,100
 21.9,0.0219,Lanesboro Public Utilities,Solar,2016,Commercial,PUC DER,22
 600,0.6,Lanesboro Public Utilities,Solar,2019,Utility,PUC DER,600
+16,0.016,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,16
+7.6,0.0076,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+6,0.006,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,6
+7.6,0.0076,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+3.8,0.0038,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,4
+3.8,0.0038,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,4
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+3,0.003,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,3
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+3,0.003,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,3
+3,0.003,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,3
+3,0.003,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,3
+3.8,0.0038,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,4
+6,0.006,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,6
+6,0.006,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,6
+15.4,0.0154,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,15
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+7.7,0.0077,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,8
+6,0.006,Lake Region Electric Cooperative,Solar,NA,Residential,PUC DER,6
 3.13,0.00313,Lake Region Electric Cooperative,Solar,2010,Residential,PUC DER,3
 7.56,0.00756,Lake Region Electric Cooperative,Solar,2019,Residential,PUC DER,8
 38,0.038,Lake Region Electric Cooperative,Solar,2019,Residential,PUC DER,38
@@ -17979,6 +18005,7 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,customer_type,d
 32.71,0.03271,Lake Country Power,Solar,2024,Residential,PUC DER,33
 10.75,0.01075,Lake Country Power,Solar,2024,Residential,PUC DER,11
 5.76,0.0057599999999999995,Lake Country Power,Solar,2024,Residential,PUC DER,6
+10.19,0.01019,Lake Country Power,Solar,NA,Residential,PUC DER,10
 11.3,0.011300000000000001,Lake Country Power,Solar,2024,Residential,PUC DER,11
 5.61,0.00561,Lake Country Power,Solar,2024,Residential,PUC DER,6
 34.94,0.03494,Lake Country Power,Solar,2024,Residential,PUC DER,35
@@ -18468,12 +18495,16 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 16.5,0.0165,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,17
 36,0.036,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,36
 19.2,0.0192,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,19
+19.4,0.019399999999999997,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,19
+10.2,0.010199999999999999,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,10
 9,0.009,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,9
 5,0.005,BENCO Electric Cooperative,Solar,2023,Residential,PUC DER,5
 24,0.024,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,24
 38,0.038,BENCO Electric Cooperative,Solar,2023,Residential,PUC DER,38
+11.5,0.0115,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,12
 4.6,0.0046,BENCO Electric Cooperative,Solar,2023,Residential,PUC DER,5
 15.37,0.01537,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,15
+14.4,0.0144,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,14
 7.68,0.007679999999999999,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,8
 7.6,0.0076,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,8
 16.4,0.016399999999999998,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,16
@@ -18493,6 +18524,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 7.68,0.007679999999999999,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,8
 6,0.006,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,6
 5,0.005,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,5
+39.9,0.0399,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,40
 15.2,0.0152,BENCO Electric Cooperative,Solar,2022,Residential,PUC DER,15
 9.9,0.0099,BENCO Electric Cooperative,Solar,2018,Residential,PUC DER,10
 7.6,0.0076,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,8
@@ -18506,27 +18538,41 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 37.5,0.0375,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,38
 5,0.005,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,5
 39.98,0.039979999999999995,BENCO Electric Cooperative,Solar,2021,Commercial,PUC DER,40
+20,0.02,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,20
+10,0.01,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,10
+12,0.012,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,12
 9,0.009,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,9
 6,0.006,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,6
 7.66,0.00766,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,8
 14.83,0.01483,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,15
 7.66,0.00766,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,8
+7.8,0.0078,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,8
 39,0.039,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,39
 10,0.01,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,10
 36,0.036,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,36
+1.9,0.0019,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,2
+1,0.001,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,1
 15.2,0.0152,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,15
 5.6,0.0056,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,6
+0.95,9.5e-4,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,1
 11.4,0.0114,BENCO Electric Cooperative,Solar,2018,Residential,PUC DER,11
 36,0.036,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,36
 39.95,0.03995,BENCO Electric Cooperative,Solar,2019,Commercial,PUC DER,40
+7.44,0.0074400000000000004,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,7
 10,0.01,BENCO Electric Cooperative,Solar,2019,Residential,PUC DER,10
 5.8,0.0058,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,6
 10.44,0.01044,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,10
 10.62,0.01062,BENCO Electric Cooperative,Solar,2020,Residential,PUC DER,11
 7.92,0.00792,BENCO Electric Cooperative,Solar,2019,Residential,PUC DER,8
 7.68,0.007679999999999999,BENCO Electric Cooperative,Solar,2019,Residential,PUC DER,8
+6,0.006,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,6
+14.2,0.014199999999999999,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,14
+8.45,0.00845,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,8
+8.45,0.00845,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,8
 13.2,0.0132,BENCO Electric Cooperative,Solar,2019,Residential,PUC DER,13
 3,0.003,BENCO Electric Cooperative,Solar,2009,Residential,PUC DER,3
+6.24,0.00624,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,6
+36,0.036,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,36
 15.36,0.015359999999999999,BENCO Electric Cooperative,Solar,2024,Residential,PUC DER,15
 11.22,0.01122,BENCO Electric Cooperative,Solar,2024,Residential,PUC DER,11
 18.6,0.018600000000000002,BENCO Electric Cooperative,Solar,2024,Residential,PUC DER,19
@@ -18541,8 +18587,13 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 18,0.018,BENCO Electric Cooperative,Solar,2024,Residential,PUC DER,18
 6,0.006,BENCO Electric Cooperative,Solar,2024,Residential,PUC DER,6
 38.28,0.03828,BENCO Electric Cooperative,Solar,2024,Residential,PUC DER,38
+39.6,0.0396,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,40
 19.2,0.0192,BENCO Electric Cooperative,Solar,2024,Residential,PUC DER,19
+4.14,0.00414,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,4
 9,0.009,BENCO Electric Cooperative,Solar,2019,Residential,PUC DER,9
+39.9,0.0399,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,40
+39.9,0.0399,BENCO Electric Cooperative,Solar,NA,Residential,PUC DER,40
+39.9,0.0399,BENCO Electric Cooperative,Solar,NA,Commercial,PUC DER,40
 27.55,0.02755,BENCO Electric Cooperative,Solar,2021,Residential,PUC DER,28
 8.4,0.008400000000000001,BENCO Electric Cooperative,Solar,2017,Residential,PUC DER,8
 71.6,0.0716,Grand Marais Public Utilities,Solar,2020,Utility,PUC DER,72
@@ -18898,6 +18949,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 36,0.036,Federated Rural Electric Association,Solar,2016,Residential,PUC DER,36
 6,0.006,Federated Rural Electric Association,Solar,2015,Residential,PUC DER,6
 10,0.01,Federated Rural Electric Association,Solar,2015,Residential,PUC DER,10
+12.67,0.01267,Federated Rural Electric Association,Solar,NA,Residential,PUC DER,13
 9.984,0.009984,Fairmont Public Utilities,Solar,2024,Residential,PUC DER,10
 9.12,0.00912,Fairmont Public Utilities,Solar,2024,Commercial,PUC DER,9
 6.615,0.006615,Fairmont Public Utilities,Solar,2024,Residential,PUC DER,7
@@ -19243,6 +19295,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 3.8,0.0038,East Central Energy,Solar,2024,Residential,PUC DER,4
 6.91,0.00691,East Central Energy,Solar,2023,Residential,PUC DER,7
 3.8,0.0038,East Central Energy,Solar,2023,Residential,PUC DER,4
+6.14,0.00614,East Central Energy,Solar,NA,Residential,PUC DER,6
 6.4,0.0064,East Central Energy,Solar,2023,Residential,PUC DER,6
 24.32,0.02432,East Central Energy,Solar,2023,Residential,PUC DER,24
 40,0.04,East Central Energy,Solar,2023,Commercial,PUC DER,40
@@ -19788,6 +19841,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 4.35,0.00435,Delano Municipal Utility,Solar,2020,Residential,PUC DER,4
 5,0.005,Delano Municipal Utility,Solar,2020,Residential,PUC DER,5
 39.9,0.0399,Delano Municipal Utility,Solar,2017,Commercial,PUC DER,40
+8.4,0.008400000000000001,Dakota Electric Association,Solar,NA,Commercial,PUC DER,8
 2.8,0.0028,Dakota Electric Association,Solar,2006,Residential,PUC DER,3
 2.2,0.0022,Dakota Electric Association,Solar,2007,Commercial,PUC DER,2
 2.7,0.0027,Dakota Electric Association,Solar,2007,Residential,PUC DER,3
@@ -20992,6 +21046,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 14,0.014,Dakota Electric Association,Solar,2023,Residential,PUC DER,14
 6.93,0.0069299999999999995,Dakota Electric Association,Solar,2024,Residential,PUC DER,7
 4.54,0.00454,Dakota Electric Association,Solar,2024,Residential,PUC DER,5
+11.52,0.011519999999999999,Dakota Electric Association,Solar,NA,Residential,PUC DER,12
 15,0.015,Dakota Electric Association,Solar,2024,Residential,PUC DER,15
 8.19,0.00819,Dakota Electric Association,Solar,2024,Residential,PUC DER,8
 22.8,0.0228,Dakota Electric Association,Solar,2024,Residential,PUC DER,23
@@ -21003,6 +21058,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 8.96,0.008960000000000001,Dakota Electric Association,Solar,2024,Residential,PUC DER,9
 4.48,0.0044800000000000005,Dakota Electric Association,Solar,2024,Residential,PUC DER,4
 5.12,0.00512,Dakota Electric Association,Solar,2024,Residential,PUC DER,5
+13,0.013,Dakota Electric Association,Solar,NA,Residential,PUC DER,13
 7.04,0.00704,Dakota Electric Association,Solar,2023,Residential,PUC DER,7
 5.99,0.0059900000000000005,Dakota Electric Association,Solar,2024,Residential,PUC DER,6
 3.78,0.00378,Dakota Electric Association,Solar,2023,Residential,PUC DER,4
@@ -21567,6 +21623,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 4.8,0.0048,Cooperative Light & Power,Solar,2024,Residential,PUC DER,5
 4.8,0.0048,Cooperative Light & Power,Solar,2024,Residential,PUC DER,5
 12,0.012,Cooperative Light & Power,Solar,2024,Residential,PUC DER,12
+7.02,0.007019999999999999,Cooperative Light & Power,Solar,NA,Residential,PUC DER,7
 3.6,0.0036,Cooperative Light & Power,Solar,2024,Residential,PUC DER,4
 10.25,0.01025,Cooperative Light & Power,Solar,2024,Residential,PUC DER,10
 17.93,0.017929999999999998,Cooperative Light & Power,Solar,2024,Residential,PUC DER,18
@@ -24387,8 +24444,17 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 4,0.004,City of Granite Falls,Solar,2017,NA,PUC DER,4
 14,0.014,City of Granite Falls,Solar,2016,NA,PUC DER,14
 25,0.025,City of Fairfax,Solar,2017,Commercial,PUC DER,25
+6.5,0.0065,"City of Ely, Utilities",Solar,NA,Commercial,PUC DER,7
 5.9,0.005900000000000001,"City of Ely, Utilities",Solar,2021,Residential,PUC DER,6
+8.38,0.00838,"City of Ely, Utilities",Solar,NA,Commercial,PUC DER,8
+43.2,0.0432,"City of Ely, Utilities",Solar,NA,Commercial,PUC DER,43
 8.78,0.00878,"City of Ely, Utilities",Solar,2022,Residential,PUC DER,9
+9,0.009,"City of Ely, Utilities",Solar,NA,Residential,PUC DER,9
+38,0.038,"City of Ely, Utilities",Solar,NA,Commercial,PUC DER,38
+2.97,0.00297,"City of Ely, Utilities",Solar,NA,Residential,PUC DER,3
+4.7,0.0047,"City of Ely, Utilities",Solar,NA,Commercial,PUC DER,5
+7.32,0.00732,"City of Ely, Utilities",Solar,NA,Commercial,PUC DER,7
+5.9,0.005900000000000001,"City of Ely, Utilities",Solar,NA,Residential,PUC DER,6
 4,0.004,"City of Ely, Utilities",Solar,2014,Residential,PUC DER,4
 10.24,0.01024,City of Chaska,Solar,2024,Residential,PUC DER,10
 5.7,0.0057,City of Chaska,Solar,2024,Residential,PUC DER,6
@@ -24542,6 +24608,9 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 39.65,0.03965,City of Chaska,Solar,2016,Commercial,PUC DER,40
 3.5,0.0035,City of Chaska,Solar,2017,Residential,PUC DER,4
 4.73,0.004730000000000001,City of Chaska,Solar,2016,Residential,PUC DER,5
+5.77,0.00577,City of Chaska,Solar,NA,Residential,PUC DER,6
+39,0.039,City of Caledonia Electic Department,Solar,NA,Commercial,PUC DER,39
+39,0.039,City of Caledonia Electic Department,Solar,NA,Commercial,PUC DER,39
 9.423,0.009423,City of Caledonia Electic Department,Solar,2023,Residential,PUC DER,9
 5.785,0.005785,City of Caledonia Electic Department,Solar,2023,Residential,PUC DER,6
 5.76,0.0057599999999999995,City of Caledonia Electic Department,Solar,2023,Residential,PUC DER,6
@@ -24722,10 +24791,13 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 10.08,0.01008,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,10
 34.6,0.0346,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,35
 18.19,0.01819,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,18
+9.77,0.00977,Wright-Hennepin Cooperative Electric Association,Solar,NA,Residential,PUC DER,10
 7.66,0.00766,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,8
+13.68,0.01368,Wright-Hennepin Cooperative Electric Association,Solar,NA,Residential,PUC DER,14
 10.75,0.01075,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,11
 11.5,0.0115,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,12
 17.86,0.01786,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,18
+5.93,0.0059299999999999995,Wright-Hennepin Cooperative Electric Association,Solar,NA,Residential,PUC DER,6
 18.43,0.01843,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,18
 20.64,0.020640000000000002,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,21
 8.06,0.008060000000000001,Wright-Hennepin Cooperative Electric Association,Solar,2024,Residential,PUC DER,8
@@ -25016,6 +25088,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 38,0.038,Wright-Hennepin Cooperative Electric Association,Solar,2019,Residential,PUC DER,38
 7.2,0.0072,Wright-Hennepin Cooperative Electric Association,Solar,2019,Residential,PUC DER,7
 18,0.018,Wright-Hennepin Cooperative Electric Association,Solar,2019,Residential,PUC DER,18
+10,0.01,Wright-Hennepin Cooperative Electric Association,Solar,NA,Residential,PUC DER,10
 10,0.01,Wright-Hennepin Cooperative Electric Association,Solar,2019,Residential,PUC DER,10
 10,0.01,Wright-Hennepin Cooperative Electric Association,Solar,2019,Residential,PUC DER,10
 12,0.012,Wright-Hennepin Cooperative Electric Association,Solar,2019,Residential,PUC DER,12
@@ -25635,6 +25708,8 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 39.6,0.0396,South Central Electric Association,Solar,2015,Commercial,PUC DER,40
 18,0.018,South Central Electric Association,Solar,2015,Residential,PUC DER,18
 20.9,0.0209,South Central Electric Association,Solar,2014,Residential,PUC DER,21
+19.38,0.019379999999999998,South Central Electric Association,Solar,NA,Residential,PUC DER,19
+5,0.005,South Central Electric Association,Solar,NA,Residential,PUC DER,5
 39.9,0.0399,South Central Electric Association,Solar,2015,Residential,PUC DER,40
 4,0.004,South Central Electric Association,Solar,2010,Residential,PUC DER,4
 10.8,0.0108,South Central Electric Association,Solar,2015,Residential,PUC DER,11
@@ -27359,6 +27434,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 9.1,0.0091,Otter Tail Power Co,Solar,2014,Residential,PUC DER,9
 10,0.01,Otter Tail Power Co,Solar,2014,Residential,PUC DER,10
 3,0.003,Otter Tail Power Co,Solar,2014,Commercial,PUC DER,3
+11,0.011,Otter Tail Power Co,Solar,NA,Residential,PUC DER,11
 20,0.02,Otter Tail Power Co,Solar,2012,Commercial,PUC DER,20
 33,0.033,Otter Tail Power Co,Solar,2010,Commercial,PUC DER,33
 4,0.004,Otter Tail Power Co,Solar,2011,Commercial,PUC DER,4
@@ -27422,6 +27498,13 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 36,0.036,Nobles Cooperative Electric,Solar,2020,Residential,PUC DER,36
 22.8,0.0228,Nobles Cooperative Electric,Solar,2019,Residential,PUC DER,23
 38,0.038,Nobles Cooperative Electric,Solar,2019,Residential,PUC DER,38
+15,0.015,Nobles Cooperative Electric,Solar,NA,Residential,PUC DER,15
+10,0.01,Nobles Cooperative Electric,Solar,NA,Residential,PUC DER,10
+10,0.01,Nobles Cooperative Electric,Solar,NA,Residential,PUC DER,10
+20,0.02,Nobles Cooperative Electric,Solar,NA,Residential,PUC DER,20
+8,0.008,Nobles Cooperative Electric,Solar,NA,Residential,PUC DER,8
+39.95,0.03995,Nobles Cooperative Electric,Solar,NA,Residential,PUC DER,40
+39.95,0.03995,Nobles Cooperative Electric,Solar,NA,Residential,PUC DER,40
 50,0.05,New Ulm Public Utilities,Solar,2024,Commercial,PUC DER,50
 9.28,0.00928,New Ulm Public Utilities,Solar,2024,Residential,PUC DER,9
 5.12,0.00512,New Ulm Public Utilities,Solar,2024,Residential,PUC DER,5
@@ -27478,6 +27561,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 12.5,0.0125,Mora Municipal Utilities,Solar,2023,Residential,PUC DER,13
 16,0.016,Mora Municipal Utilities,Solar,2022,Residential,PUC DER,16
 19.99,0.019989999999999997,Mora Municipal Utilities,Solar,2021,Commercial,PUC DER,20
+20,0.02,Mora Municipal Utilities,Solar,NA,Commercial,PUC DER,20
 15,0.015,Mora Municipal Utilities,Solar,2005,Residential,PUC DER,15
 37.5,0.0375,Moose Lake Water & Light Commission,Solar,2022,Commercial,PUC DER,38
 12.9,0.0129,Moose Lake Water & Light Commission,Solar,2020,Residential,PUC DER,13
@@ -27505,6 +27589,7 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 10.8,0.0108,Moorhead Public Service,Solar,2023,Residential,PUC DER,11
 7.6,0.0076,Moorhead Public Service,Solar,2023,Residential,PUC DER,8
 7.2,0.0072,Moorhead Public Service,Solar,2022,Residential,PUC DER,7
+4.46,0.0044599999999999996,Moorhead Public Service,Solar,NA,Residential,PUC DER,4
 8.4,0.008400000000000001,Moorhead Public Service,Solar,2022,Residential,PUC DER,8
 3.8,0.0038,Moorhead Public Service,Solar,2022,Residential,PUC DER,4
 6.96,0.00696,Moorhead Public Service,Solar,2021,Residential,PUC DER,7
@@ -28234,6 +28319,12 @@ NA,NA,Grove City Electric,Solar,2018,Residential,PUC DER,NA
 19.8,0.0198,Hibbing Public Utilities,Solar,2024,Residential,PUC DER,20
 19.68,0.01968,Hibbing Public Utilities,Solar,2024,Residential,PUC DER,20
 5.76,0.0057599999999999995,Hibbing Public Utilities,Solar,2023,Residential,PUC DER,6
+7.25,0.00725,Hibbing Public Utilities,Solar,NA,Residential,PUC DER,7
+NA,NA,Hibbing Public Utilities,Solar,NA,Residential,PUC DER,NA
+NA,NA,Hibbing Public Utilities,Solar,NA,Commercial,PUC DER,NA
+NA,NA,Hibbing Public Utilities,Solar,NA,Commercial,PUC DER,NA
+NA,NA,Hibbing Public Utilities,Solar,NA,Commercial,PUC DER,NA
+NA,NA,Hibbing Public Utilities,Solar,NA,Commercial,PUC DER,NA
 7.03,0.007030000000000001,City of Baudette,Solar,2024,Residential,PUC DER,7
 7.98,0.007980000000000001,Detroit Lakes Public Utilities,Solar,2024,Residential,PUC DER,8
 38.4,0.0384,Detroit Lakes Public Utilities,Solar,2024,Commercial,PUC DER,38

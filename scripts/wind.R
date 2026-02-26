@@ -5,7 +5,7 @@ library(duckdb)
 cat("=== Wind ===\n")
 
 db_path <- Sys.getenv("GENERATOR_DB_PATH",
-  unset = "I:/Enrgy_div/SEO/CleanEnegyTechUnit/CET Projects/Data Repository/generator_database_shared/generator_database_dbt/dev.duckdb")
+  unset = "I:/Enrgy_div/SEO/CleanEnegyTechUnit/CET Projects/Data Repository/generator_database_shared/generator_database_dbt/prod.duckdb")
 
 db <- dbConnect(duckdb::duckdb(), db_path, read_only = TRUE)
 raw_wind <- dbGetQuery(db, "
