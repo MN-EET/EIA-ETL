@@ -19,7 +19,7 @@ year,value,Sector,fuel_type
 2020,377689,Residential,Total
 2021,382661,Residential,Total
 2022,405386,Residential,Total
-2023,367380,Residential,Total
+2023,367163,Residential,Total
 2003,187597,Commercial,Total
 2004,178330,Commercial,Total
 2005,185058,Commercial,Total
@@ -40,7 +40,7 @@ year,value,Sector,fuel_type
 2020,198034,Commercial,Total
 2021,202714,Commercial,Total
 2022,227579,Commercial,Total
-2023,209272,Commercial,Total
+2023,209263,Commercial,Total
 2003,301485,Industrial,Total
 2004,322402,Industrial,Total
 2005,330233,Industrial,Total
@@ -59,6 +59,6 @@ year,value,Sector,fuel_type
 2018,348186,Industrial,Total
 2019,352436,Industrial,Total
 2020,314604,Industrial,Total
-2021,326361,Industrial,Total
-2022,322940,Industrial,Total
-2023,320404,Industrial,Total
+2021,326347,Industrial,Total
+2022,322953,Industrial,Total
+2023,320411,Industrial,Total
