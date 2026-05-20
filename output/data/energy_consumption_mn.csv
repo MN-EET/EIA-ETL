@@ -1,7 +1,7 @@
 period,fuel,value
-2023,Total,1689341
-2022,Total,1756519
-2021,Total,1722794
+2023,Total,1687864
+2022,Total,1756803
+2021,Total,1722779
 2020,Total,1641082
 2019,Total,1822743
 2018,Total,1857732
@@ -63,9 +63,10 @@ period,fuel,value
 1962,Total,749533
 1961,Total,712762
 1960,Total,708144
-2023,Petroleum,567064
-2022,Petroleum,568942
-2021,Petroleum,561836
+2024,Petroleum,558043
+2023,Petroleum,566050
+2022,Petroleum,568955
+2021,Petroleum,561822
 2020,Petroleum,533056
 2019,Petroleum,625015
 2018,Petroleum,613902
@@ -190,10 +191,11 @@ period,fuel,value
 2020,Imports,89722
 2021,Imports,94697
 2022,Imports,84737
-2023,Imports,88038
+2023,Imports,88042
 2024,Imports,13172
-2023,Renewables,223858
-2022,Renewables,229767
+2024,Renewables,227397
+2023,Renewables,224000
+2022,Renewables,230038
 2021,Renewables,216108
 2020,Renewables,206257
 2019,Renewables,224857
@@ -321,7 +323,8 @@ period,fuel,value
 1962,Coal,131206
 1961,Coal,130948
 1960,Coal,131265
-2023,Natural Gas,536789
+2024,Natural Gas,529606
+2023,Natural Gas,536178
 2022,Natural Gas,535010
 2021,Natural Gas,523812
 2020,Natural Gas,496026

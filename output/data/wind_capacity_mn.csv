@@ -1,10 +1,10 @@
 utility,year_interconnected,nameplate_mw,kwac
 ALLETE Clean Energy,1998,107.2,107200
-City of Moorhead - (MN),1999,0.7,700
 Northern States Power Co - Minnesota,1999,100.2,100200
 Consolidated Edison Development Inc.,1999,9.2,9200
 "Lakota Ridge, LLC (Longroad)",1999,11.2,11200
 "Shaokatan Hills, LLC (Longroad)",1999,11.8,11800
+City of Moorhead - (MN),1999,0.7,700
 CHI Operations Inc,2000,1.9,1900
 CHI Operations Inc,2000,1.9,1900
 CHI Operations Inc,2001,1.9,1900
@@ -79,13 +79,13 @@ ALLETE Clean Energy,2006,3.9,3900
 Greenbacker Renewable Energy Corporation,2006,5.4,5400
 High Prairie Wind Farm II LLC,2007,100.7,100700
 "EDF Renewable Asset Holdings, Inc.",2007,205.5,205500
-"Marshall Wind Farm, LLC",2007,4.2,4200
-"Marshall Wind Farm, LLC",2007,4.2,4200
-"Marshall Wind Farm, LLC",2007,4.2,4200
-"Marshall Wind Farm, LLC",2007,2.1,2100
-"Marshall Wind Farm, LLC",2007,2.1,2100
-"Marshall Wind Farm, LLC",2007,2.1,2100
 City of Mountain Lake - (MN),2007,1.2,1200
+"Marshall Wind Farm, LLC",2007,4.2,4200
+"Marshall Wind Farm, LLC",2007,4.2,4200
+"Marshall Wind Farm, LLC",2007,4.2,4200
+"Marshall Wind Farm, LLC",2007,2.1,2100
+"Marshall Wind Farm, LLC",2007,2.1,2100
+"Marshall Wind Farm, LLC",2007,2.1,2100
 Avangrid Power LLC,2008,150,150000
 "Ewington Energy Systems, LLC",2008,22.5,22500
 "ALLETE, Inc.",2008,25,25000
@@ -96,10 +96,10 @@ Northern States Power Co - Minnesota,2008,100.5,100500
 Federated Rural Electric Assn,2008,2.1,2100
 "Hilltop Power, LLC",2008,2,2000
 ALLETE Clean Energy,2008,8.4,8400
+Willmar Municipal Utilities,2009,2,2000
+Willmar Municipal Utilities,2009,2,2000
 Avangrid Power LLC,2009,49.5,49500
 "EDF Renewable Asset Holdings, Inc.",2009,100.5,100500
-Willmar Municipal Utilities,2009,2,2000
-Willmar Municipal Utilities,2009,2,2000
 Northern States Power Co - Minnesota,2010,201,201000
 "Grant County Wind, LLC",2010,21,21000
 RENEW Energy Inc,2010,1.5,1500

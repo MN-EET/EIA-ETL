@@ -11,7 +11,7 @@ db_path <- Sys.getenv("GENERATOR_DB_PATH",
 db <- dbConnect(duckdb::duckdb(), db_path, read_only = TRUE)
 raw_solar <- dbGetQuery(db, "
   SELECT *, ROUND(nameplate_mw * 1000) AS kwac
-  FROM main.mart_combined__solar_capacity
+  FROM main_generators.mart_combined__solar_capacity
 ") |> tibble() |> mutate(customer_type = str_to_title(customer_type))
 dbDisconnect(db, shutdown = TRUE)
 

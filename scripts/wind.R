@@ -10,7 +10,7 @@ db_path <- Sys.getenv("GENERATOR_DB_PATH",
 db <- dbConnect(duckdb::duckdb(), db_path, read_only = TRUE)
 raw_wind <- dbGetQuery(db, "
   SELECT utility, operating_year AS year_interconnected, nameplate_mw, nameplate_mw * 1000 AS kwac
-  FROM main.mart_total__wind_capacity
+  FROM main_generators.mart_total__wind_capacity
 ") |> tibble()
 dbDisconnect(db, shutdown = TRUE)
 

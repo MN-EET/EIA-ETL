@@ -10,7 +10,7 @@ db_path <- Sys.getenv("GENERATOR_DB_PATH",
 db <- dbConnect(duckdb::duckdb(), db_path, read_only = TRUE)
 storage <- dbGetQuery(db, "
   SELECT *, nameplate_mw * 1000 AS kwac
-  FROM main.mart_combined__storage_capacity
+  FROM main_generators.mart_combined__storage_capacity
   WHERE year_interconnected <= 2024
 ") |> tibble()
 dbDisconnect(db, shutdown = TRUE)
