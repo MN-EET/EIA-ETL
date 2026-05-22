@@ -1,4 +1,5 @@
 period,fuel,value
+2024,Total,1648756
 2023,Total,1687864
 2022,Total,1756803
 2021,Total,1722779
@@ -192,7 +193,7 @@ period,fuel,value
 2021,Imports,94697
 2022,Imports,84737
 2023,Imports,88042
-2024,Imports,13172
+2024,Imports,75371
 2024,Renewables,227397
 2023,Renewables,224000
 2022,Renewables,230038

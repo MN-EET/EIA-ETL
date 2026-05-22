@@ -4,29 +4,6 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,data_source,kwa
 3000,3,"Gopher Energy Storage, LLC",Batteries,2018,EIA-860,3000
 1000,1,United States Solar Corporation,Batteries,2022,EIA-860,1000
 5000,5,Western Minnesota Mun Pwr Agny,Batteries,2024,EIA-860,5000
-13.027,0.013026999999999999,Xcel Energy,Storage,2023,PUC DER,13.027
-12.216,0.012216,Xcel Energy,Storage,2023,PUC DER,12.216
-13.612,0.013612,Xcel Energy,Storage,2023,PUC DER,13.612
-3.84,0.0038399999999999997,Xcel Energy,Storage,2023,PUC DER,3.84
-13.12,0.01312,Xcel Energy,Storage,2023,PUC DER,13.12
-18,0.018,Xcel Energy,Storage,2024,PUC DER,18
-12.6,0.0126,Xcel Energy,Storage,2023,PUC DER,12.6
-12.71,0.01271,Xcel Energy,Storage,2023,PUC DER,12.71
-30,0.03,Xcel Energy,Storage,2023,PUC DER,30
-15.67,0.01567,Xcel Energy,Storage,2023,PUC DER,15.67
-11.52,0.011519999999999999,Xcel Energy,Storage,2024,PUC DER,11.52
-10,0.01,Xcel Energy,Storage,2024,PUC DER,10
-10,0.01,Xcel Energy,Storage,2024,PUC DER,10
-25.2,0.0252,Xcel Energy,Storage,2023,PUC DER,25.2
-24.658,0.024658000000000003,Xcel Energy,Storage,2023,PUC DER,24.658
-20.025,0.020024999999999998,Xcel Energy,Storage,2023,PUC DER,20.025
-3.84,0.0038399999999999997,Xcel Energy,Storage,2023,PUC DER,3.84
-3.84,0.0038399999999999997,Xcel Energy,Storage,2024,PUC DER,3.84
-5,0.005,Xcel Energy,Storage,2024,PUC DER,5
-5,0.005,Xcel Energy,Storage,2024,PUC DER,5
-10,0.01,Xcel Energy,Storage,2024,PUC DER,10
-7.68,0.007679999999999999,Xcel Energy,Storage,2024,PUC DER,7.68
-5,0.005,Xcel Energy,Storage,2019,PUC DER,5
 75,0.075,"Arrowhead Electric Cooperative, Inc",Storage,2024,PUC DER,75
 10,0.01,Minnesota Valley Electric Cooperative,Storage,2024,PUC DER,10
 23.04,0.023039999999999998,Minnesota Valley Electric Cooperative,Storage,2024,PUC DER,23.04
@@ -176,3 +153,26 @@ nameplate_kw,nameplate_mw,utility,technology,year_interconnected,data_source,kwa
 18.12,0.01812,Xcel Energy,Storage,2023,PUC DER,18.12
 10.51,0.01051,Xcel Energy,Storage,2023,PUC DER,10.51
 8.16,0.00816,Xcel Energy,Storage,2023,PUC DER,8.16
+13.027,0.013026999999999999,Xcel Energy,Storage,2023,PUC DER,13.027
+12.216,0.012216,Xcel Energy,Storage,2023,PUC DER,12.216
+13.612,0.013612,Xcel Energy,Storage,2023,PUC DER,13.612
+3.84,0.0038399999999999997,Xcel Energy,Storage,2023,PUC DER,3.84
+13.12,0.01312,Xcel Energy,Storage,2023,PUC DER,13.12
+18,0.018,Xcel Energy,Storage,2024,PUC DER,18
+12.6,0.0126,Xcel Energy,Storage,2023,PUC DER,12.6
+12.71,0.01271,Xcel Energy,Storage,2023,PUC DER,12.71
+30,0.03,Xcel Energy,Storage,2023,PUC DER,30
+15.67,0.01567,Xcel Energy,Storage,2023,PUC DER,15.67
+11.52,0.011519999999999999,Xcel Energy,Storage,2024,PUC DER,11.52
+10,0.01,Xcel Energy,Storage,2024,PUC DER,10
+10,0.01,Xcel Energy,Storage,2024,PUC DER,10
+25.2,0.0252,Xcel Energy,Storage,2023,PUC DER,25.2
+24.658,0.024658000000000003,Xcel Energy,Storage,2023,PUC DER,24.658
+20.025,0.020024999999999998,Xcel Energy,Storage,2023,PUC DER,20.025
+3.84,0.0038399999999999997,Xcel Energy,Storage,2023,PUC DER,3.84
+3.84,0.0038399999999999997,Xcel Energy,Storage,2024,PUC DER,3.84
+5,0.005,Xcel Energy,Storage,2024,PUC DER,5
+5,0.005,Xcel Energy,Storage,2024,PUC DER,5
+10,0.01,Xcel Energy,Storage,2024,PUC DER,10
+7.68,0.007679999999999999,Xcel Energy,Storage,2024,PUC DER,7.68
+5,0.005,Xcel Energy,Storage,2019,PUC DER,5
